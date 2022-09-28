@@ -38,7 +38,7 @@ age.csv (contains ages of all individuals in each season)
   age - age as category (1=yearling, 2=adult)
   
   
-bri (contains all breeding individuals)
+bri.csv (contains all breeding individuals)
   ID          - unique identifier for each individual
   year_       -
   box         - unique identifier for each nestbox
@@ -53,37 +53,37 @@ bri (contains all breeding individuals)
   IDyear      - unique identifier for each individual for each year
 
 
-brx (contains all occupied breeding boxes)
+brx.csv (contains all occupied breeding boxes)
   year_ -
   box   - unique identifier for each nestbox
 
 
-coor (contains coordinates for all nest boxes)
+coor.csv (contains coordinates for all nest boxes)
   box - unique identifier for each nestbox
   x   - x-coordinate
   y   - y-coordinate
 
 
-distance (contains distances between all combinations of nestboxes)
+distance.csv (contains distances between all combinations of nestboxes)
   box1      -
   box2      -
   distance  - distance in meters
 
 
-ep (contains all cases of extra-pair paternity)
+ep.csv (contains all cases of extra-pair paternity)
   year_       - 
   ID          - unique identifier for each individual
   box         - box of focal individual
   box_partner - box of extra-pair pertner of focal individual
 
 
-lin (contains start date of nestbuilding for each nest)
+lin.csv (contains start date of nestbuilding for each nest)
   year_ - 
   box   - unique identifier for each nestbox
   lin   - day of start nest building  (1 = Jan 1)
   
   
-distance (contains distances and neighbourhood orders between all combinations of occupied nestboxes)  
+distance.csv (contains distances and neighbourhood orders between all combinations of occupied nestboxes)  
   year_	    -
   box1	    -
   box2	    -
@@ -91,24 +91,24 @@ distance (contains distances and neighbourhood orders between all combinations o
   no        - neighbourhood order
 
 
-sex (contains sex of each individual)
+sex.csv (contains sex of each individual)
   ID  - unique identifier for each individual
   sex - sex of indvidual (1=male, 2=female)
 
 
-terrbox (contains which territory each box belonged to in each year)
+terrbox.csv (contains which territory each box belonged to in each year)
   year_     -
   box       - unique identifier for each nestbox
   territory - unique identifier for each territory
 
 
-transponders (contains transponder number of each individual)
+transponders.csv (contains transponder number of each individual)
   ID          - unique identifier for each individual
   transponder - unique identifier for each transponder
   sex         - sex of indvidual (1=male, 2=female)
 
 
-visits_all (contains all extra-territorial nestbox visits)
+visits_all.csv (contains all extra-territorial nestbox visits)
   year_       -
   yday        - day of year (1 = Jan 1)
   ID          - unique identifier for each individual
@@ -124,7 +124,7 @@ visits_all (contains all extra-territorial nestbox visits)
   sunset      - time of sunset
 
 
-visits_day (containsdaily summary of extra-territorial nestbox visits for each individual)
+visits_day.csv (containsdaily summary of extra-territorial nestbox visits for each individual)
   year_       - 
   ID          - unique identifier for each individual
   yday        - day of year (1 = Jan 1)
