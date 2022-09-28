@@ -10,7 +10,6 @@
     
 #Get table visits
     foo = copy(visits_day)
-    foo = merge(foo, brx[,.(year_, box)], by=c('year_','box'), all.x=TRUE)
     foo = foo[,.(IDyear, yday, visits)]
     foo = unique(foo)
     foo[, visit := 1]
@@ -73,6 +72,7 @@
       scale_colour_manual(values=c('#619CFF', '#F8766D')) +
       geom_vline(xintercept=0, lty=2, size=.5) +
       ylim(0,.5) +
+      #labs(tag = "a)") +
       theme_classic() +
       theme(axis.title=element_text(size=14),
             axis.text=element_text(size=12),
@@ -107,6 +107,7 @@
       scale_colour_manual(name = NULL, labels = c('male', 'female'), values=c('#619CFF', '#F8766D')) +
       geom_vline(xintercept=0, lty=3, size=.5) +
       ylim(0,.5) +
+      #labs(tag = "") +
       theme_classic() +
       theme(axis.title=element_text(size=14),
             axis.text=element_text(size=12),
@@ -116,8 +117,8 @@
     p2
     
   #Combine plots  and save
-    fig2 = grid.arrange(p1, p2, ncol=2, widths=c(2,3))
-    ggsave(fig2, file='plot.png', width=10, height=6)
+    fig2a = grid.arrange(p1, p2, ncol=2, widths=c(2,3))
+    ggsave(fig2a, file='plot.png', width=10, height=6)
     
     
     
