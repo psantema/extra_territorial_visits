@@ -40,7 +40,7 @@
       theme_classic() +
       theme(axis.title=element_text(size=12),
             axis.text=element_text(size=12),
-            legend.position = c(0.8, 0.9),
+            legend.position = c(0.75, 0.9),
             plot.tag = element_text(size=16),
             legend.text = element_text(size=10))
     p1
@@ -63,8 +63,8 @@
     
     
   #Number of territories visited (including all individuals)  
-    foo1 = ddd[visited_terr==1,.(boxes = length(unique(box))), by=c('IDyear', 'sex')]
-    foo2 = unique(ddd[,.(IDyear, sex)])
+    foo1 = bb[visited_terr==1,.(boxes = length(unique(box))), by=c('IDyear', 'sex')]
+    foo2 = unique(bb[,.(IDyear, sex)])
     foo = merge(foo2, foo1, by=c('IDyear', 'sex'), all.x=TRUE)
     foo[, boxes := ifelse(is.na(boxes),0,boxes)]
     summary(foo$boxes)
@@ -90,6 +90,6 @@
     
     
     fig1 = grid.arrange(p1, p2, p3, ncol=1)
-    ggsave(fig1, file='plot.png', width=4.5, height=10)
+    ggsave(fig1, file='fig1.tiff', width=4.5, height=10)
     
     

@@ -20,11 +20,10 @@
       geom_histogram(data=g[sex==2], aes(x=chron, y=..count..), colour="black", fill="#F8766D", binwidth=1/2, boundary = 0, alpha=.8) +
       scale_x_continuous(limits = c(0,24), breaks = c(0:24), labels = c("00:00","","","","04:00","","","","08:00","","","","12:00","","","","16:00","","","","20:00","","","","24:00")) +
       xlab("Time of day") + ylab("Number of visits") + 
-      labs(tag = "c)") +
       theme_classic() +
       theme(axis.text=element_text(size=12),
             plot.tag = element_text(size=16),
             axis.title=element_text(size=14))
     p_time
     
-    
+    ggsave(p_time, file='fig4.tiff', width=5.5, height=5)

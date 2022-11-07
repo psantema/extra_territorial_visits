@@ -17,7 +17,7 @@
 #Create table with all combinations of ID and yday
     dd = as.data.table(expand.grid(yday=c(60:151), IDyear=unique(bri$IDyear)))
   #Add breeding data  
-    dd = merge(dd, bri[,.(IDyear, ID, age, lin, firstEgg, clutch, hatchDate, fledgeDate)], c('IDyear'), all.x=TRUE)
+    dd = merge(dd, bri[,.(IDyear, ID, age, lin, firstEgg, clutch, hatchDate, fledgeDate, year_)], c('IDyear'), all.x=TRUE)
   #Add visit data
     dd = merge(dd, foo, by=c('IDyear','yday'), all.x=TRUE)
     dd[, visit := ifelse(is.na(visit),0,1)]
@@ -118,7 +118,7 @@
     
   #Combine plots  and save
     fig2a = grid.arrange(p1, p2, ncol=2, widths=c(2,3))
-    ggsave(fig2a, file='plot.png', width=10, height=6)
+    ggsave(fig2a, file='fig2.tiff', width=10, height=5.5)
     
     
     

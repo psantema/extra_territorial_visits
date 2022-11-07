@@ -72,20 +72,18 @@
     p3 = ggplot() +
       geom_point(data=e, aes(x=visited_terr, y=fit, group=sex, colour=sex), position = position_dodge(width=.5 )) +
       geom_errorbar(data=e, aes(x=visited_terr, ymin=upper, ymax=lower, group=sex, colour=sex), width=.5, position = position_dodge(width=.5 )) +
-      ylab("Likelihood of EPP at box") + xlab("") +
+      ylab("Likelihood of having extra-pair offspring") + xlab("") +
       scale_colour_manual(name = NULL, labels = c('male', 'female'), values=c('#619CFF', '#F8766D')) +
       scale_x_discrete(labels=c('No visit', 'Visit')) +
       ylim(0,.25) +
-      labs(tag = "d)") +
       theme_classic() +
       theme(axis.title=element_text(size=14),
             axis.text=element_text(size=12),
-            legend.position="none",
+            legend.position=c(0.8, 0.9),
             plot.tag = element_text(size=16),
             legend.text = element_text(size=12))
     p3
     
-    p = grid.arrange(p1, p2, p_tod, p3, ncol=2) 
-    ggsave(p, file='plot.png', width=10, height=9)
+    ggsave(p3, file='fig5.tiff', width=5.5, height=5)
     
     

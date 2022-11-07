@@ -65,19 +65,21 @@
     m2 = glmer(visited_terr ~ poly(no,2) + poly(distance,2) + (1|year_) + (1|ID), family=binomial, data=bb2)
     summary(m2)
     
+    cor.test(bb$no, bb$distance)
+    
     
 #Plot neighbourhood order 
   #Get predictions male    
     bb1 = bb[sex==1]
     bb1[, no := as.factor(no)]
-    m1 = glmer(visited_box ~ no + (1|year_) + (1|ID), family=binomial, data=bb1)
+    m1 = glmer(visited_terr ~ no + (1|year_) + (1|ID), family=binomial, data=bb1)
     d1 = allEffects(m1)
     d1 = d1$"no"  %>% data.frame  %>% data.table
     d1[, sex := 1]
   #Get predictions female  
     bb2 = bb[sex==2]
     bb2[, no := as.factor(no)]
-    m2 = glmer(visited_box ~ no + (1|year_) + (1|ID) , family=binomial, data=bb2)
+    m2 = glmer(visited_terr ~ no + (1|year_) + (1|ID) , family=binomial, data=bb2)
     d2 = allEffects(m2)
     d2 = d2$"no"  %>% data.frame  %>% data.table
     d2[, sex := 2]
@@ -102,20 +104,20 @@
 #Plot distance    
   #Get predictions male  
     bb1 = bb[sex==1]
-    m1 = glmer(visited_box ~ poly(distance,2) + (1|year_) + (1|ID) , family=binomial, data=bb1)
+    m1 = glmer(visited_terr ~ poly(distance,2) + (1|year_) + (1|ID) , family=binomial, data=bb1)
     d1 = allEffects(m1, xlevels=200)
     d1 = d1$"poly(distance,2)"  %>% data.frame  %>% data.table
     d1[, sex := 1]
   #Get predictions female      
     bb2 = bb[sex==2]
-    m2 = glmer(visited_box ~ poly(distance,2) + (1|year_) + (1|ID) , family=binomial, data=bb2)
+    m2 = glmer(visited_terr ~ poly(distance,2) + (1|year_) + (1|ID) , family=binomial, data=bb2)
     d2 = allEffects(m2, xlevels=200)
     d2 = d2$"poly(distance,2)"  %>% data.frame  %>% data.table
     d2[, sex := 2]
   #Combine male and female  
     e=rbind(d1,d2)
     e[, sex := as.factor(sex)]
-    e = e[distance>30]
+    e = e[distance>20]
     p2 = ggplot() +
       geom_line(data=e, aes(x=distance, y=fit, group=sex), size=0.3) +
       geom_ribbon(data=e, aes(x=distance, ymin=lower, ymax=upper, group=sex, fill=sex), alpha=0.7) +
@@ -132,7 +134,8 @@
             legend.text = element_text(size=11))
     p2
     
-    grid.arrange(p1, p2, ncol=2)
     
+    fig3 = grid.arrange(p1, p2, ncol=2)
+    ggsave(fig3, file='fig3.tiff', width=9, height=5)
     
     

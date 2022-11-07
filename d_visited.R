@@ -11,20 +11,20 @@
 #Get table visits
   #get male visits
     mm = copy(visits_day)
-    mm[, boxyear := paste(territory, year_, sep='_')]
-    mm = mm[sex==1,.(boxyear, yday, visits_m=visits)]
+    mm[, boxyear := paste(territory, year_, sep='_')] #change territory to box when only considering visits to the breeding box
+    mm = mm[sex==1, .(visits_m=sum(visits)), by=c('boxyear', 'yday')]
     mm = unique(mm)
     mm[, visit_m := 1]
   #get male visits
     ff = copy(visits_day)
-    ff[, boxyear := paste(territory, year_, sep='_')]
-    ff = ff[sex==2,.(boxyear, yday, visits_f=visits)]
+    ff[, boxyear := paste(territory, year_, sep='_')] #change territory to box when only considering visits to the breeding box
+    ff = ff[sex==2, .(visits_f=sum(visits)), by=c('boxyear', 'yday')]
     ff = unique(ff)
     ff[, visit_f := 1]
 
     
-#Get lay, hatch and fledge dates of all boxes
-    br = merge(brx, unique(bri[,.(box, year_, lin, firstEgg, clutch, hatchDate, fledgeDate)]), by=c('box','year_'))
+#Get lay date, hatch date and fledge date of all boxes
+    br = unique(bri[,.(box, year_, lin, firstEgg, clutch, hatchDate, fledgeDate)])
     br[, boxyear := paste(box, year_, sep='_')]
 
     
@@ -85,10 +85,10 @@
     p1 = ggplot() +
       geom_errorbar(data=e, aes(yday_egg, ymin=upper, ymax=lower, group=sex, colour=sex), position = position_dodge(width=.5 )) +
       geom_point(data=e, aes(x=yday_egg, y=fit, group=sex, colour=sex), position = position_dodge(width=.5 )) +
-      ylab("Proportion receivingg ≥1 visit") + xlab("Day relative to first egg") +
+      ylab("Proportion receiving ≥1 visit") + xlab("Day relative to first egg") +
       scale_colour_manual(values=c('#619CFF', '#F8766D')) +
       geom_vline(xintercept=0, lty=2, size=.5) +
-      ylim(0,.5) +
+      ylim(0,.4) +
       #labs(tag = "b)") +
       theme_classic() +
       theme(axis.title=element_text(size=14),
@@ -124,7 +124,7 @@
        ylab("") + xlab("Day relative to hatching") +
        scale_colour_manual(name = NULL, labels = c('male', 'female'), values=c('#619CFF', '#F8766D')) +
        geom_vline(xintercept=0, lty=3, size=.5) +
-       ylim(0,.5) +
+       ylim(0,.4) +
        #labs(tag = "") +
        theme_classic() +
        theme(axis.title=element_text(size=14),
